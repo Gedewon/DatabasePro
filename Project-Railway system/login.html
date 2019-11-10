@@ -9,9 +9,27 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href = "startup.css" rel="stylesheet">
     <title>Ethio Railway</title>
+    <style>
+     .form-container{
+       background-color: #373E44; 
+       color: #EFEFEF;
+       border-style: solid;
+       padding: 25px ;
+       border-width: 1px;
+       border-color: #373E44;
+       border-radius: 10px;
+       position: relative;
+       top:80px;
+       
+     }
+     .login_img{
+       position: relative;
+       left:300 px;
+     }
+    </style>
   </head>
   <body>
-        <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark ">
             
                 <a class="navbar-brand" href="index.html">Ethio Railway</a>
                 
@@ -34,8 +52,39 @@
                 </form>
                 </div>  
             
-              </nav>
+    </nav>
 <!--Login form body-->
+
+<section class="container"> 
+  <section class = "row d-flex align-items-center justify-content-center" >
+    <section class ="col-lg-8 col-sm-10 col-md-10 col-xs-12">
+        <form class = "form-container ">
+          <div class = "login_img">
+              <img src = "img/login/login.png">
+          </div>
+          
+          <h1 class = "text-center font-weight-bold">Login Form</h1>
+            <div class="form-group">
+              <input type="email" class="form-control form-control-lg" id="username" placeholder="User Name">  
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control form-control-lg" id="password" placeholder="Password">
+            </div>
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Remember Me</label>
+              </div>
+             <div class="form-group">
+              <small class="form-text"><a href ="">Forget Password?</a></small>
+             </div>
+             <div class = "form-group">
+               <small class="form-text">Create an account?<a href="">Sign up</a></small>
+             </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+    </section>
+  </section>
+</section>
 
 
  
