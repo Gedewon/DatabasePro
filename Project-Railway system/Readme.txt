@@ -1,1 +1,0 @@
-This is a database project for Ethiopian Railway system
