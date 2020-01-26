@@ -3,14 +3,26 @@
         <div class="col-lg-4 col-md-4 col-sm-1 col-xs-1">
         </div>
         <div class="col-lg-4 col-md-4 col-sm-10 col-xs-10">
-            <form action="/action_page.js">
+            {{#if success}}
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Account Created Successfully! </strong> {{success}}.
+            </div>
+            {{/if}}
+            {{#if error}}
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Login Failed! </strong> {{error}}.
+            </div>
+            {{/if}}
+            <form action="/api/auth/login" method="GET">
                 <div class="form-group">
                     <label for="username">User Name/Email address</label>
-                    <input type="text" class="form-control" id="username" placeholder="User Name / Email address">
+                    <input type="text" value="{{username}}" name="userName" class="form-control" id="username" placeholder="User Name">
                 </div>
                 <div class="form-group">
                     <label for="pwd">Password:</label>
-                    <input type="password" class="form-control" id="pwd" placeholder="Password">
+                    <input type="password" value="{{password}}" name="password" class="form-control" id="pwd" placeholder="Password">
                 </div>
                 <div class="form-group form-check">
                     <label class="form-check-label">
@@ -24,7 +36,7 @@
                     <small class="form-text">Create an account?<a href="/api/signup">Sign up</a></small>
                 </div>
                 <div class="form-group">
-                    <small class="form-text">Sign In With <a href = "">GoogleAccount</a></small>
+                    <small class="form-text">Sign In With <a href="">GoogleAccount</a></small>
                 </div>
                 <button type="submit" class="btn btn-primary">Login</button>
             </form>
