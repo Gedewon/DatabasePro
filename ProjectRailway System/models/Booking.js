@@ -4,24 +4,25 @@ const Schema = mongoose.Schema;
 //create Booking Schema 
 
 const BookingSchema = new Schema({
-    passengerUsername: {
+    passengerId: {
         //forigen key from passenger table
-        type: String, 
-        minlength: 3,
-        maxlength: 50,
-        required : true,
+        type: Schema.Types.ObjectId,
+        ref : 'passengers'
     },
     trainId: {
         //forigen key from train table
-        type: String, 
-        minlength: 3,
-        required : true,
+        type: Schema.Types.ObjectId,
+        ref : 'train'
     },
-    routeId: {
-        //forigen key from route table
-        type: String, 
-        minlength: 3,
-        required : true,
+    startingStationId : {
+        //foreign key
+        type: Schema.Types.ObjectId,
+        ref : 'station'
+    }, 
+    destinationStationId : {
+        //foreign key
+        type: Schema.Types.ObjectId,
+        ref : 'station'
     }, 
     seatNumber : {
         type : Number, 
@@ -34,8 +35,12 @@ const BookingSchema = new Schema({
     time :{
         type: String, 
         minlength : 5,
-        maxlength : 5,
+        maxlength : 8,
         required: true
+    }, 
+    checkedIn : {
+        type : Boolean,
+        required : true
     }
 
     

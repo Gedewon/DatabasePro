@@ -7,7 +7,7 @@ const StationSchema = new Schema({
     location :{
         type: String, 
         minlength : 5,
-        maxlength : 5,
+        maxlength : 50,
         required: true
     },
     sequencingNumber:{

@@ -6,10 +6,8 @@ const Schema = mongoose.Schema;
 const AddressSchema = new Schema({
     username: {
         //forigen key
-        type: String, 
-        minlength: 3,
-        maxlength: 50,
-        required : true,
+        type: Schema.Types.ObjectId,
+        ref : 'passengers'
     },
     city: {
         type: String, 

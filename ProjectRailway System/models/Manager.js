@@ -51,10 +51,10 @@ const ManagerSchema = new Schema({
         maxlength:1024,
         required : true
     },
-    stationSequencingNumber : {
+    stationId : {
         //foreign key
-        type : string, 
-        required : true
+        type : Schema.Types.ObjectId,
+        ref : 'station'
     }
 })
 

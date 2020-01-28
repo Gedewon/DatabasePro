@@ -1,0 +1,19 @@
+<div class="container text-center">
+    <h3><em>Bookings</em></h3>
+    <div class="card bg-dark text-white">
+        <div class="card-body">
+            {{#each booking}}
+            <p><strong>Name</strong>: Biruk <strong>Username</strong>: ATR/0000/09 </p>
+            <p><strong>Destination Station</strong>: Saris </p>
+            <p><strong>Number</strong>: 4 <strong>Time</strong>: 4.30 PM</p>
+            <p> <strong>Date</strong>: Jan 21 2020 </p>
+        </div>
+        <form method="POST" action="/api/login/manager/checkIn/:{{id}}?_method=PUT">
+            <button class="btn btn-dark" type="submit">Check In</button>
+        </form>
+
+        <hr>
+        {{/each}}
+    </div>
+    <br>
+</div>
