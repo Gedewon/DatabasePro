@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 //create PhoneNumber Schema 
 
 const PhoneNumberSchema = new Schema({
-    username: {
+    userId: {
         //forigen key
         type: Schema.Types.ObjectId,
         ref : 'passengers'

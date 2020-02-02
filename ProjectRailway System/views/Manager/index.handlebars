@@ -3,14 +3,16 @@
     <div class="card bg-dark text-white">
         <div class="card-body">
             {{#each booking}}
-            <p><strong>Name</strong>: Biruk <strong>Username</strong>: ATR/0000/09 </p>
-            <p><strong>Destination Station</strong>: Saris </p>
-            <p><strong>Number</strong>: 4 <strong>Time</strong>: 4.30 PM</p>
-            <p> <strong>Date</strong>: Jan 21 2020 </p>
+            <p><strong>Name</strong>: {{passengerId.firstName}} {{passengerId.lastName}}
+                <strong>Username</strong>: {{passengerId.username}}</p>
+            <p><strong>Destination Station</strong>: {{destinationStationId.location}} </p>
+            <p><strong>Seat Number</strong>:{{seatNumber}} <strong>Time</strong>:{{time}}</p>
+            <p> <strong>Date</strong>: {{date}} </p>
+            <form method="POST" action="/api/login/manager/checkIn/{{_id}}?_method=PUT">
+                <button class="btn btn-dark" type="submit">Check In</button>
+            </form>
+
         </div>
-        <form method="POST" action="/api/login/manager/checkIn/:{{id}}?_method=PUT">
-            <button class="btn btn-dark" type="submit">Check In</button>
-        </form>
 
         <hr>
         {{/each}}

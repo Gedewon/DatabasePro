@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 const StationSchema = new Schema({
     location :{
         type: String, 
-        minlength : 5,
+        minlength : 4,
         maxlength : 50,
         required: true
     },

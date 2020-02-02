@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 //create Address Schema 
 
 const AddressSchema = new Schema({
-    username: {
+    userId: {
         //forigen key
         type: Schema.Types.ObjectId,
         ref : 'passengers'

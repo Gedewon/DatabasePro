@@ -15,7 +15,13 @@ const NewTrainSchema = new Schema({
     Color : {
         type : String , 
         required : true 
+    },
+    TrainAvailable:{
+        type: Boolean,
+        required: true,
+        default : true
     }
+
 }); 
 
 mongoose.model('train' , NewTrainSchema); 

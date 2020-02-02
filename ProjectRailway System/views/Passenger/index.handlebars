@@ -73,4 +73,9 @@
     <a class="btn btn-dark" href="/api/login/passenger/booking">Click here To Book</a>
     <br>
     {{/each}}
+    {{#if Booking}}
+    {{#if BookingViewMore}}
+        <a class="btn btn-link" href="/api/login/passenger/index/viewMore">view More</a> 
+    {{/if}}
+    {{/if}}
 </div>

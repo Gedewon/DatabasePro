@@ -40,7 +40,8 @@ const BookingSchema = new Schema({
     }, 
     checkedIn : {
         type : Boolean,
-        required : true
+        required : true,
+        default : false
     }
 
     

@@ -1,0 +1,25 @@
+
+
+<div class="container text-center">
+    <h3><em>Checked In Bookings</em></h3>
+    {{#each Booking}}
+    <div class="card bg-dark text-white">
+        <div class="card-body">
+            <h3>Starting : {{startingStationId.location}}</h3>
+            <h3>Destination : {{destinationStationId.location}}</h3>
+            <p>Seat Number: {{seatNumber}} </p>
+            <p>Train Color : {{trainId.Color}}</p>
+            <p>Time: {{time}}</p>
+            <p> Date: {{date}}</p>
+        </div>
+        <hr>
+    </div>
+    <br>
+    {{else}}
+    <h3> You Have No Traveling Records Yet!</h3>
+    <br>
+    {{/each}}
+    {{#if BookingViewMore}}
+        <a class="btn btn-link" href="/api/login/passenger/booking/history/viewMore">view More</a> 
+    {{/if}}
+</div>

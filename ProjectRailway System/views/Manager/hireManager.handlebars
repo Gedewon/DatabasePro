@@ -1,0 +1,129 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-1 col-xs-1">
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-10 col-xs-10">
+            {{#if error}}
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Failed to Create Account!</strong> {{error}}.
+            </div>
+            {{/if}}
+            {{#if success}}
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Account Created!</strong>.
+            </div>
+            {{/if}}
+            <form action="/api/register/manager" method="POST">
+                <div class="form-group">
+                    <label for="first_name">First Name:</label>
+                    <input type="text" name="FirstName" class="form-control" id="first_name" value="{{FirstName}}"
+                        placeholder="First Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="last_name">Last Name:</label>
+                    <input type="text" name="LastName" class="form-control" id="last_name" value="{{LastName}}"
+                        placeholder="Last Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="day_birth" style="font-weight: bold;">Birth OF Date:</label>
+                </div>
+                <div class="form-group">
+                    <label for="day_birth">Day:</label>
+                    <input type="text" name="BOD_Day" class="form-control" id="day_birth" value="{{BOD_Day}}"
+                        placeholder="Day" required>
+                </div>
+                <div class="form-group">
+                    <label for="month_birth">Month:</label>
+                    <input type="text" name="BOD_Month" class="form-control" id="month_birth" placeholder="Month"
+                        value="{{BOD_Month}}" required>
+                </div>
+                <div class="form-group">
+                    <label for="year_birth">Year:</label>
+                    <input type="text" name="BOD_Year" class="form-control" id="year_birth" value="{{BOD_Year}}"
+                        placeholder="Year" required>
+                </div>
+                <div class="form-group">
+                    <label for="phonenum">Phone Number:</label>
+                    <input type="text" name="PhoneNumber" class="form-control" id="phonenum" placeholder="Phone Number"
+                        value="{{PhoneNumber}}" required>
+                </div>
+                <div class="form-group">
+                    <label for="Male">Sex:</label>
+
+                    <div class="row ">
+                        <div class="col-sm-6 form-group">
+                            <input class="form-check-input, " type="radio" name="gridRadios" id="Male" value="Male"
+                                checked>
+                            <label class="form-check-label" for="Male">
+                                Male
+                            </label>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <input class="form-check-input, " type="radio" name="gridRadios" id="Female" value="Female">
+                            <label class="form-check-label" for="Female">
+                                Female
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="subCity" style="font-weight: bold;">Address:</label>
+                </div>
+                <div class="form-group">
+                    <label for="city">City:</label>
+                    <input type="text" name="city" class="form-control" id="city" value="{{city}}" placeholder="City"
+                        required>
+                </div>
+                <div class="form-group">
+                    <label for="subCity">Sub city:</label>
+                    <input type="text" name="subCity" class="form-control" id="subCity" value="{{subCity}}"
+                        placeholder="Sub City">
+                </div>
+                <div class="form-group">
+                    <label for="kebele">Kebele:</label>
+                    <input type="text" name="kebele" class="form-control" id="kebele" placeholder="Kebele"
+                        value="{{kebele}}" required>
+                </div>
+                <div class="form-group">
+                    <label for="homeNumber">Home Number:</label>
+                    <input type="text" name="homeNumber" class="form-control" id="homeNumber" value="{{homeNumber}}"
+                        placeholder="Home Number" required>
+                </div>
+                <div class="form-group">
+                    <label for="Station">Working Station:</label>
+                    <select id="Station" name="Location"
+                        class="browser-default custom-select custom-select-lg mb-3 form-control">
+                        <option selected value="null">Select Location</option>
+                        {{#each station}}
+                        <option value={{location}}>{{location}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="username_signup">Username:</label>
+                    <input type="text" name="UserName" class="form-control" id="username_signup" placeholder="User Name"
+                        value="{{UserName}}" required>
+                </div>
+                <div class="form-group">
+                    <label for="pwd">Password:</label>
+                    <div class="row ">
+                        <div class="col-sm-6 form-group">
+                            <input class="form-control " id="pwd" name="Password" type="password" placeholder="Password"
+                                required>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <input class="form-control " id="email" name="PasswordConfirm"
+                                placeholder="Confirm Password" type="password" required>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Create account</button>
+            </form>
+
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-1 col-xs-1">
+        </div>
+    </div>
+</div>

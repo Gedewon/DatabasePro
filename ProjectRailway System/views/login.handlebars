@@ -15,28 +15,22 @@
                 <strong>Login Failed! </strong> {{error}}.
             </div>
             {{/if}}
-            <form action="/api/auth/login" method="GET">
+            <form action="/api/login" method="POST">
                 <div class="form-group">
-                    <label for="username">User Name/Email address</label>
+                    <label for="username">User Name</label>
                     <input type="text" value="{{username}}" name="userName" class="form-control" id="username" placeholder="User Name">
                 </div>
                 <div class="form-group">
                     <label for="pwd">Password:</label>
-                    <input type="password" value="{{password}}" name="password" class="form-control" id="pwd" placeholder="Password">
+                    <input type="password"  name="password" class="form-control" id="pwd" placeholder="Password">
                 </div>
                 <div class="form-group form-check">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox"> Remember me
+                        <input class="form-check-input" name = 'manager' type="checkbox"> Manager
                     </label>
                 </div>
                 <div class="form-group">
-                    <small class="form-text"><a href="">Forget Password?</a></small>
-                </div>
-                <div class="form-group">
                     <small class="form-text">Create an account?<a href="/api/signup">Sign up</a></small>
-                </div>
-                <div class="form-group">
-                    <small class="form-text">Sign In With <a href="">GoogleAccount</a></small>
                 </div>
                 <button type="submit" class="btn btn-primary">Login</button>
             </form>

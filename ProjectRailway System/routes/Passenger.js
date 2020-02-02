@@ -1,8 +1,24 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const key = '5e2e85fcf063c417c079babd';
 
+var global = require('../helper/global')
+var user = global.get();
+var key = user.userId;
+
+const redirectPassengerLogin = (req, res, next) => {
+    user = global.get();
+    key = user.userId
+    if (user.userType != 'passenger') {
+        res.redirect('/api')
+    } else {
+        return next();
+    }
+}
+
+
+
+console.log(global.get())
 //load schema
 require('../models/Booking')
 require('../models/Station')
@@ -13,9 +29,26 @@ const Station = mongoose.model('station');
 const Train = mongoose.model('train');
 
 //page routes
-router.get('/', (req, res) => {
-    Booking.find({ passengerId: key })
-        .limit(6)
+router.get('/', redirectPassengerLogin, (req, res) => {
+    Booking.find({ passengerId: key, checkedIn: false })
+        .limit(3)
+        .sort({ date: 'desc' })
+        .select('seatNumber')
+        .select('time')
+        .select('date')
+        .populate('trainId', 'Color')
+        .populate('startingStationId', 'location')
+        .populate('destinationStationId', 'location')
+        .then(passengerBooking => {
+            res.render('Passenger/index', {
+                passenger: 'passenger Page',
+                Booking: passengerBooking,
+                BookingViewMore: 'available'
+            })
+        })
+});
+router.get('/index/viewMore', redirectPassengerLogin, (req, res) => {
+    Booking.find({ passengerId: key, checkedIn: false })
         .sort({ date: 'desc' })
         .select('seatNumber')
         .select('time')
@@ -30,7 +63,7 @@ router.get('/', (req, res) => {
             })
         })
 });
-router.get('/booking', (req, res) => {
+router.get('/booking', redirectPassengerLogin, (req, res) => {
     Station.find({})
         .select('location')
         .then(stationLocation => {
@@ -41,12 +74,41 @@ router.get('/booking', (req, res) => {
         })
 
 })
-router.get('/booking/history', (req, res) => {
-    res.render('Passenger/history', {
-        passenger: 'passenger Page',
-    })
+router.get('/booking/history', redirectPassengerLogin, (req, res) => {
+    Booking.find({ passengerId: key, checkedIn: true })
+        .limit(3)
+        .sort({ date: 'desc' })
+        .select('seatNumber')
+        .select('time')
+        .select('date')
+        .populate('trainId', 'Color')
+        .populate('startingStationId', 'location')
+        .populate('destinationStationId', 'location')
+        .then(passengerBooking => {
+            res.render('Passenger/history', {
+                passenger: 'passenger Page',
+                Booking: passengerBooking,
+                BookingViewMore: 'available'
+            })
+        })
+});
+router.get('/booking/history/viewMore', redirectPassengerLogin, (req, res) => {
+    Booking.find({ passengerId: key, checkedIn: true })
+        .sort({ date: 'desc' })
+        .select('seatNumber')
+        .select('time')
+        .select('date')
+        .populate('trainId', 'Color')
+        .populate('startingStationId', 'location')
+        .populate('destinationStationId', 'location')
+        .then(passengerBooking => {
+            res.render('Passenger/history', {
+                passenger: 'passenger Page',
+                Booking: passengerBooking
+            })
+        })
 })
-router.post('/book', (req, res) => {
+router.post('/book', redirectPassengerLogin , (req, res) => {
     let newBooking = new Booking({
         passengerId: key,
         trainId: '',
@@ -123,10 +185,15 @@ router.post('/book', (req, res) => {
                                     newBooking.destinationStationId = destinationStation._id
                                     newBooking.save()
                                         .then(booked => {
-                                            res.render('Passenger/booking', {
-                                                passenger: 'passenger Page',
-                                                success: 'booked'
-                                            })
+                                            Station.find({})
+                                                .select('location')
+                                                .then(stationLocation => {
+                                                    res.render('Passenger/booking', {
+                                                        passenger: 'passenger Page',
+                                                        success: 'booked',
+                                                        station: stationLocation
+                                                    })
+                                                })
                                         })
                                 })
                         })
@@ -147,12 +214,10 @@ router.post('/book', (req, res) => {
                         .select('_id')
                         .then(startingStation => {
                             startingId2 = startingStation._id
-                            console.log(startingId2)
                             Station.findOne({ location: pathchangeStation })
                                 .select('_id')
                                 .then(destinationStationId => {
                                     destinationId2 = destinationStationId._id
-                                    console.log(startingId2)
                                     newBooking.startingStationId = startingId2
                                     newBooking.destinationStationId = destinationId2
                                     newBooking.save()
@@ -204,12 +269,24 @@ router.post('/book', (req, res) => {
 
     }
 })
-router.delete('/cancel/:id', (req, res) => {
+router.delete('/cancel/:id', redirectPassengerLogin , (req, res) => {
     Booking.deleteOne({ _id: req.params.id })
         .then(() => {
-            res.render('Passenger/index', {
-                success: 'deleted'
-            })
+            Booking.find({ passengerId: key, checkedIn: false })
+                .limit(3)
+                .sort({ date: 'desc' })
+                .select('seatNumber')
+                .select('time')
+                .select('date')
+                .populate('trainId', 'Color')
+                .populate('startingStationId', 'location')
+                .populate('destinationStationId', 'location')
+                .then(passengerBooking => {
+                    res.render('Passenger/index', {
+                        passenger: 'passenger Page',
+                        Booking: passengerBooking
+                    })
+                })
         })
 })
 module.exports = router
